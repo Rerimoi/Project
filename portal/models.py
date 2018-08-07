@@ -15,9 +15,9 @@ class Signup(models.Model):
 
 
 # user profile model
-class Profile(models.Model):
-    user_avatar = models.ImageField(height_field="300", width_field="300")
-    full_name = models.TextField(max_length="50")
+class UserProfile(models.Model):
+    user_avatar = models.ImageField(height_field=100, width_field=100)
+    full_name = models.TextField(max_length=50)
     id_no = models.IntegerField
     email = models.EmailField
     date_of_birth = models.DateField
@@ -25,25 +25,24 @@ class Profile(models.Model):
     mobile_no = models.IntegerField
     marital_status = models.TextField(max_length=10)
     postal_address = models.CharField
-    education_level = models.TextField(max_length="100")
-    field_of_study = models.TextField(max_length="100")
-    profession = models.TextField(max_length="100")
+    education_level = models.TextField(max_length=100)
+    field_of_study = models.TextField(max_length=100)
+    profession = models.TextField(max_length=100)
     admission_date = models.DateField
-    volunteer_type = models.CharField(max_length="50")
-    committee_type = models.CharField(max_length="30")
+    volunteer_type = models.TextField(max_length=50)
+    committee_type = models.TextField(max_length=50)
     position_held_from = models.DateField
     position_held_to = models.DateField
 
-    @property
     def user(self):
-        return self.Profile
+        # return self.Profile
         self.save()
 
 
 # news updates model
 
 class Updates(models.Model):
-    title = models.TextField(max_length="15")
+    title = models.TextField(max_length=15)
     text = models.TextField
     publish_date = models.DateTimeField(blank=True, null=True)
 
@@ -55,11 +54,11 @@ class Updates(models.Model):
 # Membership payment model
 
 class Payment(models.Model):
-    membership_type = models.TextField(max_length="50")
-    payment_description = models.TextField(max_length="30")
+    membership_type = models.TextField(max_length=50)
+    payment_description = models.TextField(max_length=30)
     amount = models.IntegerField
     payment_date = models.DateField
 
     def membership(self):
-        return self.Payment
+        return self.Payment()
         self.save()

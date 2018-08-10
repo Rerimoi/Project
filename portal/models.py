@@ -17,33 +17,35 @@ class Signup(models.Model):
 # user profile model
 class UserProfile(models.Model):
     user_avatar = models.ImageField(height_field=100, width_field=100)
-    full_name = models.TextField(max_length=50)
+    full_name = models.CharField(max_length=50)
     id_no = models.IntegerField
     email = models.EmailField
     date_of_birth = models.DateField
     gender = models.CharField(max_length=10)
     mobile_no = models.IntegerField
-    marital_status = models.TextField(max_length=10)
+    marital_status = models.CharField(max_length=10)
     postal_address = models.CharField
-    education_level = models.TextField(max_length=100)
-    field_of_study = models.TextField(max_length=100)
-    profession = models.TextField(max_length=100)
-    admission_date = models.DateField
-    volunteer_type = models.TextField(max_length=50)
-    committee_type = models.TextField(max_length=50)
-    position_held_from = models.DateField
-    position_held_to = models.DateField
+    education_level = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=100)
+    profession = models.CharField(max_length=100)
+    admission_date = models.DateField(blank=True, null=True)
+    volunteer_type = models.CharField(max_length=50)
+    committee_type = models.CharField(max_length=50)
+    position_held_from = models.DateField(blank=True, null=True)
+    position_held_to = models.DateField(blank=True, null=True)
 
     def user(self):
-        # return self.Profile
+        self.admission_date = timezone
+        self.position_held_from = timezone
+        self.position_held_to = timezone
         self.save()
 
 
 # news updates model
 
-class Updates(models.Model):
-    title = models.TextField(max_length=15)
-    text = models.TextField
+class Update(models.Model):
+    title = models.CharField(max_length=15)
+    body = models.TextField
     publish_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
@@ -54,11 +56,12 @@ class Updates(models.Model):
 # Membership payment model
 
 class Payment(models.Model):
-    membership_type = models.TextField(max_length=50)
-    payment_description = models.TextField(max_length=30)
-    amount = models.IntegerField
-    payment_date = models.DateField
+    membership_type = models.CharField(max_length=50)
+    payment_description = models.CharField(max_length=30)
+    amount = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    payment_date = models.DateField(blank=True, null=True)
 
     def membership(self):
-        return self.Payment()
+        self.payment_date = timezone.now()
         self.save()
+        return "KSh" + self.amount

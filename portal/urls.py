@@ -18,8 +18,7 @@ from django.urls import path
 from portal import views
 from portal.views import login
 
-
-urlpatterns = {
+urlpatterns = [
 
      path('', views.login,),
-}
+]

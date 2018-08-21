@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 # Create your views here.
 def login(request):
-    return render(request, 'portal/home.html', {})
+    return render(request, 'dashboard/home.html', {})

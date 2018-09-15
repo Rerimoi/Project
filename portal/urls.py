@@ -16,9 +16,9 @@ Including another URLconf
 from django.urls import path
 
 from portal import views
-from portal.views import login
+from portal.views import start_page
 
 urlpatterns = [
 
-     path('', views.login,),
+     path('', views.start_page,),
 ]
